@@ -22,6 +22,9 @@ function AddQuiz() {
 						<label htmlFor="option1">Option 4</label>
 						<input type="text" className="form-control" id="option4" />
 					</div>
+					<button type="submit" className="btn btn-primary">
+						Submit
+					</button>
 				</form>
 			</div>
 		</div>
