@@ -1,11 +1,37 @@
-import { render } from "@testing-library/react";
 import React from "react";
 import "./../App.css";
 
-function AddQuiz() {
+const AddQuiz = ({
+	question,
+	setQuestion,
+	option1,
+	option2,
+	option3,
+	option4,
+	setOption1,
+	setOption2,
+	setOption3,
+	setOption4,
+	answer,
+	setAnswer,
+}) => {
+	const questionHandler = (e) => {
+		console.log(e.target.value);
+		setQuestion(e.target.value);
+	};
 	return (
 		<div className="AddQuiz container">
 			<h3>Add Quiz Component</h3>
+
+			<form>
+				<input
+					value={question}
+					onChange={(e) => {
+						this.setQuestion(e.target.value);
+					}}
+					type="text"
+				/>
+			</form>
 			<div className="formDiv">
 				<form>
 					<div className="form-group">
@@ -29,6 +55,6 @@ function AddQuiz() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default AddQuiz;

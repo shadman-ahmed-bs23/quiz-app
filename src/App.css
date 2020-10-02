@@ -25,19 +25,9 @@ li {
 	text-decoration: none !important;
 }
 
-/* Add Quiz CSS */
-.formDiv {
-	width: 80%;
-}
-.option {
-	display: flex;
-}
-label {
-	padding: 0px 10px;
-}
-#option1,
-#option2,
-#option3,
-#option4 {
-	width: 120px;
+.home {
+	height: 100vh;
+	text-align: center;
+	margin: 0px auto;
+	border: 10px solid black;
 }
