@@ -31,3 +31,28 @@ li {
 	margin: 0px auto;
 	border: 10px solid black;
 }
+
+.questions {
+	margin-top: 20px;
+	text-align: center;
+	background-color: #ededed;
+	padding: 20px;
+	border-left: 5px solid blue;
+}
+
+.options-container {
+	display: inline-block;
+	width: 30%;
+}
+.option {
+	background-color: rgb(156, 156, 231);
+	border-radius: 10px;
+	margin: 10px 10px;
+	padding: 2px;
+	cursor: pointer;
+	transition: 0.5s ease-in-out;
+}
+.option:hover {
+	background-color: rgb(73, 73, 163);
+	color: #fff;
+}
