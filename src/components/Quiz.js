@@ -4,6 +4,10 @@ import { Helmet } from "react-helmet";
 
 import questions from "./../questions.json";
 import isEmpty from "./../is-empty.js";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 class Quiz extends React.Component {
 	state = {
 		questions,
@@ -53,6 +57,90 @@ class Quiz extends React.Component {
 			});
 		}
 	};
+
+	handleOptionClick = (e) => {
+		if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
+			this.correctAnswer();
+		} else {
+			this.wrongAnswer();
+		}
+	};
+	showAlert = () => {
+		const MySwal = withReactContent(Swal);
+
+		//return MySwal.fire(<p>Shorthand works too</p>);
+		return MySwal.fire({
+			icon: "success",
+			title: "Answer Taken",
+			confirmButtonText: "Sure",
+		});
+	};
+	correctAnswer = () => {
+		const MySwal = withReactContent(Swal);
+		//return MySwal.fire(<p>Shorthand works too</p>);
+		MySwal.fire({
+			icon: "success",
+			title: "Answer is Correct",
+			confirmButtonText: "Okay",
+		});
+		this.setState(
+			(prevState) => ({
+				score: prevState.score + 1,
+				correctAnswers: prevState.correctAnswer + 1,
+				currentQuestionIndex: prevState.currentQuestionIndex + 1,
+				numberOfAnsweredQuestion: prevState.numberOfAnsweredQuestion + 1,
+			}),
+			() => {
+				if (this.state.nextQuestion === undefined) {
+					this.endQuiz();
+				} else {
+					this.displayQuestions(
+						this.state.questions,
+						this.state.currentQuestionIndex,
+						this.nextQuestion,
+						this.previousQuestion
+					);
+				}
+			}
+		);
+	};
+	wrongAnswer = () => {
+		const MySwal = withReactContent(Swal);
+		MySwal.fire({
+			icon: "error",
+			title: "Answer is Incorrect",
+			confirmButtonText: "Try Next",
+		});
+		this.setState(
+			(prevState) => ({
+				wrongAnswers: prevState.wrongAnswers + 1,
+				currentQuestionIndex: prevState.currentQuestionIndex + 1,
+				numberOfAnsweredQuestion: prevState.numberOfAnsweredQuestion + 1,
+			}),
+			() => {
+				if (this.state.nextQuestion === undefined) {
+					this.endQuiz();
+				} else {
+					this.displayQuestions(
+						this.state.questions,
+						this.state.currentQuestionIndex,
+						this.nextQuestion,
+						this.previousQuestion
+					);
+				}
+			}
+		);
+	};
+	endQuiz = () => {
+		const MySwal = withReactContent(Swal);
+		MySwal.fire({
+			title: "The Quiz is finished! Well Done!",
+		});
+		setTimeout(() => {
+			this.props.history.push("/play/instructions");
+		}, 1000);
+	};
+
 	render() {
 		console.log(questions);
 		const { currentQuestion } = this.state;
@@ -66,12 +154,20 @@ class Quiz extends React.Component {
 					<div className="questions">
 						<h5>{currentQuestion.question} </h5>
 						<div className="options-container">
-							<p className="option">{currentQuestion.optionA}</p>
-							<p className="option">{currentQuestion.optionB}</p>
+							<p onClick={this.handleOptionClick} className="option">
+								{currentQuestion.optionA}
+							</p>
+							<p onClick={this.handleOptionClick} className="option">
+								{currentQuestion.optionB}
+							</p>
 						</div>
 						<div className="options-container">
-							<p className="option">{currentQuestion.optionC}</p>
-							<p className="option">{currentQuestion.optionD}</p>
+							<p onClick={this.handleOptionClick} className="option">
+								{currentQuestion.optionC}
+							</p>
+							<p onClick={this.handleOptionClick} className="option">
+								{currentQuestion.optionD}
+							</p>
 						</div>
 
 						<div className="button-container mt-3">
