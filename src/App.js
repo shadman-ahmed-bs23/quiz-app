@@ -28,7 +28,7 @@ function App() {
 			</div>
 		</Router>
 		*/
-		<Router>
+		<Router basename="/quiz-app">
 			<Route path="/" exact component={Home} />
 			<Route path="/play/instructions" exact component={QuizInstructions} />
 			<Route path="/play/quiz" exact component={Quiz} />
