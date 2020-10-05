@@ -57,7 +57,7 @@ class Quiz extends React.Component {
 			});
 		}
 	};
-
+	// Handle Answer/ Option Button click
 	handleOptionClick = (e) => {
 		if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
 			this.correctAnswer();
@@ -68,13 +68,48 @@ class Quiz extends React.Component {
 	showAlert = () => {
 		const MySwal = withReactContent(Swal);
 
-		//return MySwal.fire(<p>Shorthand works too</p>);
 		return MySwal.fire({
 			icon: "success",
 			title: "Answer Taken",
 			confirmButtonText: "Sure",
 		});
 	};
+	handleNextButtonClick = (e) => {
+		if (this.state.nextQuestion !== undefined) {
+			this.setState(
+				(prevState) => ({
+					currentQuestionIndex: prevState.currentQuestionIndex + 1,
+				}),
+				() => {
+					this.displayQuestions(
+						this.state.state,
+						this.state.currentQuestion,
+						this.state.nextQuestion,
+						this.state.previousQuestion
+					);
+				}
+			);
+		}
+	};
+	handlePreviousButtonClick = (e) => {
+		if (this.state.previousQuestion !== undefined) {
+			this.setState(
+				(prevState) => ({
+					currentQuestionIndex: prevState.currentQuestionIndex - 1,
+				}),
+				() => {
+					this.displayQuestions(
+						this.state.state,
+						this.state.currentQuestion,
+						this.state.nextQuestion,
+						this.state.previousQuestion
+					);
+				}
+			);
+		}
+	};
+
+	//Function for selecting correct answer
 	correctAnswer = () => {
 		const MySwal = withReactContent(Swal);
 		//return MySwal.fire(<p>Shorthand works too</p>);
@@ -104,6 +139,8 @@ class Quiz extends React.Component {
 			}
 		);
 	};
+
+	//Function for selecting a wrong answer
 	wrongAnswer = () => {
 		const MySwal = withReactContent(Swal);
 		MySwal.fire({
@@ -145,6 +182,7 @@ class Quiz extends React.Component {
 		console.log(questions);
 		const { currentQuestion } = this.state;
 		console.log(currentQuestion);
+		//console.log(this.state.currentQuestionIndex);
 		return (
 			<Fragment>
 				<Helmet>
@@ -152,7 +190,9 @@ class Quiz extends React.Component {
 				</Helmet>
 				<div className="container">
 					<div className="questions">
-						<h5>{currentQuestion.question} </h5>
+						<h5>
+							{this.state.currentQuestionIndex + 1}. {currentQuestion.question}
+						</h5>
 						<div className="options-container">
 							<p onClick={this.handleOptionClick} className="option">
 								{currentQuestion.optionA}
@@ -171,9 +211,23 @@ class Quiz extends React.Component {
 						</div>
 
 						<div className="button-container mt-3">
-							<button className="btn btn-secondary mr-2">Previous</button>
-							<button className="btn btn-success mr-2">Next</button>
-							<button className="btn btn-danger mr-2">Quit</button>
+							<button
+								id="preivous-btn"
+								onClick={this.handlePreviousButtonClick}
+								className="btn btn-secondary mr-2"
+							>
+								Previous
+							</button>
+							<button
+								id="next-btn"
+								onClick={this.handleNextButtonClick}
+								className="btn btn-success mr-2"
+							>
+								Next
+							</button>
+							<button id="quit-btn" className="btn btn-danger mr-2">
+								Quit
+							</button>
 						</div>
 					</div>
 				</div>

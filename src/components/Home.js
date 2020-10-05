@@ -15,13 +15,13 @@ const Home = () => (
 			<h1 className="text-center mt-5">Quiz App</h1>
 
 			<Link to="/play/instructions">
-				<button className="btn btn-primary mr-5">Play</button>
+				<button className="btn btn-primary ml-5">Play</button>
 			</Link>
 			<Link to="/login">
-				<button className="btn btn-info mr-5">Login</button>
+				<button className="btn btn-info ml-5">Login</button>
 			</Link>
 			<Link to="/register">
-				<button className="btn btn-secondary mr-5">Sign Up</button>
+				<button className="btn btn-secondary ml-5">Sign Up</button>
 			</Link>
 		</div>
 	</Fragment>
