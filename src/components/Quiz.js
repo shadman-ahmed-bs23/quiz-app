@@ -20,6 +20,7 @@ class Quiz extends React.Component {
 		score: 0,
 		correctAnswers: 0,
 		wrongAnswers: 0,
+		time: {},
 	};
 	componentDidMount() {
 		const {
@@ -34,6 +35,7 @@ class Quiz extends React.Component {
 			nextQuestion,
 			previousQuestion
 		);
+		this.startTimer();
 	}
 
 	displayQuestions = (
@@ -168,6 +170,42 @@ class Quiz extends React.Component {
 			}
 		);
 	};
+
+	//Timer of the quiz
+	startTimer() {
+		const countDownTime = Date.now() + 150000;
+		this.interval = setInterval(() => {
+			const now = new Date();
+			const distance = countDownTime - now;
+
+			const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			if (distance < 0) {
+				clearInterval(this.interval);
+				this.setState(
+					{
+						time: {
+							minutes: 0,
+							seconds: 0,
+						},
+					},
+					() => {
+						alert("Quiz has ended");
+						this.props.history.push("/");
+					}
+				);
+			} else {
+				this.setState({
+					time: {
+						minutes,
+						seconds,
+					},
+				});
+			}
+		}, 1000);
+	}
+
 	endQuiz = () => {
 		const MySwal = withReactContent(Swal);
 		MySwal.fire({
@@ -180,7 +218,7 @@ class Quiz extends React.Component {
 
 	render() {
 		console.log(questions);
-		const { currentQuestion } = this.state;
+		const { currentQuestion, currentQuestionIndex, time } = this.state;
 		console.log(currentQuestion);
 		//console.log(this.state.currentQuestionIndex);
 		return (
@@ -190,8 +228,11 @@ class Quiz extends React.Component {
 				</Helmet>
 				<div className="container">
 					<div className="questions">
+						<h1>
+							{time.minutes}:{time.seconds}
+						</h1>
 						<h5>
-							{this.state.currentQuestionIndex + 1}. {currentQuestion.question}
+							{currentQuestionIndex + 1}. {currentQuestion.question}
 						</h5>
 						<div className="options-container">
 							<p onClick={this.handleOptionClick} className="option">
