@@ -9,13 +9,14 @@ const QuizInstructions = () => {
 				<title>Quiz Instructions - Quiz App</title>
 			</Helmet>
 			<div className="container text-center">
-				<h1 className="text-center mt-5">Just play a simple quiz app</h1>
-				<h3 className="text-center mt-5">
-					There are no instructions actually :V
-				</h3>
+				<h1 className="text-center mt-5">Play a simple quiz</h1>
+				<h3 className="text-center mt-5">There are no instructions actually</h3>
 				<Link to="/play/quiz">
-					<button className="btn btn-outline-success">Take the quiz!</button>
+					<button className="btn btn-outline-success mr-2">
+						Take the quiz!
+					</button>
 				</Link>
+				<button className="btn btn-outline-secondary ml-2">Take me back</button>
 			</div>
 		</Fragment>
 	);

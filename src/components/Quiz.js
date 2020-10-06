@@ -20,6 +20,8 @@ class Quiz extends React.Component {
 		score: 0,
 		correctAnswers: 0,
 		wrongAnswers: 0,
+		nextButtonDisabled: false,
+		previousButtonDisabled: true,
 		time: {},
 	};
 	componentDidMount() {
@@ -51,12 +53,17 @@ class Quiz extends React.Component {
 			nextQuestion = questions[currentQuestionIndex + 1];
 			previousQuestion = questions[currentQuestionIndex - 1];
 			const answer = currentQuestion.answer;
-			this.setState({
-				currentQuestion,
-				nextQuestion,
-				previousQuestion,
-				answer,
-			});
+			this.setState(
+				{
+					currentQuestion,
+					nextQuestion,
+					previousQuestion,
+					answer,
+				},
+				() => {
+					this.handleDisableButton();
+				}
+			);
 		}
 	};
 	// Handle Answer/ Option Button click
@@ -108,6 +115,36 @@ class Quiz extends React.Component {
 					);
 				}
 			);
+		}
+	};
+
+	//Disabling previous and next button
+	handleDisableButton = () => {
+		//For previous button
+		if (
+			this.state.previousQuestion === undefined ||
+			this.state.currentQuestionIndex === 0
+		) {
+			this.setState({
+				previousButtonDisabled: true,
+			});
+		} else {
+			this.setState({
+				previousButtonDisabled: false,
+			});
+		}
+		//For Next button
+		if (
+			this.state.nextQuestion === undefined ||
+			this.state.currentQuestionIndex + 1 === 15
+		) {
+			this.setState({
+				nextButtonDisabled: true,
+			});
+		} else {
+			this.setState({
+				nextButtonDisabled: false,
+			});
 		}
 	};
 
@@ -218,7 +255,13 @@ class Quiz extends React.Component {
 
 	render() {
 		console.log(questions);
-		const { currentQuestion, currentQuestionIndex, time } = this.state;
+		const {
+			currentQuestion,
+			currentQuestionIndex,
+			time,
+			previousButtonDisabled,
+			nextButtonDisabled,
+		} = this.state;
 		console.log(currentQuestion);
 		//console.log(this.state.currentQuestionIndex);
 		return (
@@ -255,14 +298,18 @@ class Quiz extends React.Component {
 							<button
 								id="preivous-btn"
 								onClick={this.handlePreviousButtonClick}
-								className="btn btn-secondary mr-2"
+								className={`btn btn-secondary mr-2 ${
+									previousButtonDisabled ? "disable" : ""
+								}`}
 							>
 								Previous
 							</button>
 							<button
 								id="next-btn"
 								onClick={this.handleNextButtonClick}
-								className="btn btn-success mr-2"
+								className={`btn btn-success  mr-2 ${
+									nextButtonDisabled ? "disable" : ""
+								}`}
 							>
 								Next
 							</button>

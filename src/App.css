@@ -55,3 +55,9 @@ li {
 	background-color: rgb(73, 73, 163);
 	color: #fff;
 }
+
+.disable {
+	background-color: #ccc;
+	box-shadow: none;
+	pointer-events: none;
+}
