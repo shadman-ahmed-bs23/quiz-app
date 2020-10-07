@@ -30,6 +30,7 @@ class Quiz extends React.Component {
 			currentQuestion,
 			nextQuestion,
 			previousQuestion,
+			score,
 		} = this.state;
 		this.displayQuestions(
 			questions,
@@ -39,7 +40,7 @@ class Quiz extends React.Component {
 		);
 		this.startTimer();
 	}
-
+	//Displaying all quiz question
 	displayQuestions = (
 		questions = this.state.questions,
 		currentQuestion,
@@ -83,6 +84,7 @@ class Quiz extends React.Component {
 			confirmButtonText: "Sure",
 		});
 	};
+	//Handle next button
 	handleNextButtonClick = (e) => {
 		if (this.state.nextQuestion !== undefined) {
 			this.setState(
@@ -100,6 +102,7 @@ class Quiz extends React.Component {
 			);
 		}
 	};
+	//Handle previous button
 	handlePreviousButtonClick = (e) => {
 		if (this.state.previousQuestion !== undefined) {
 			this.setState(
@@ -117,8 +120,10 @@ class Quiz extends React.Component {
 			);
 		}
 	};
+	//Handle Quit Button
+	//handleQuitButtonClick = (e) => {}
 
-	//Disabling previous and next button
+	//Disabling previous and next button when necessary
 	handleDisableButton = () => {
 		//For previous button
 		if (
@@ -166,7 +171,7 @@ class Quiz extends React.Component {
 			}),
 			() => {
 				if (this.state.nextQuestion === undefined) {
-					this.endQuiz();
+					this.endQuiz(this.state.score);
 				} else {
 					this.displayQuestions(
 						this.state.questions,
@@ -195,7 +200,7 @@ class Quiz extends React.Component {
 			}),
 			() => {
 				if (this.state.nextQuestion === undefined) {
-					this.endQuiz();
+					this.endQuiz(this.state.score);
 				} else {
 					this.displayQuestions(
 						this.state.questions,
@@ -243,18 +248,21 @@ class Quiz extends React.Component {
 		}, 1000);
 	}
 
-	endQuiz = () => {
+	endQuiz = (score) => {
 		const MySwal = withReactContent(Swal);
+		console.log(score);
 		MySwal.fire({
-			title: "The Quiz is finished! Well Done!",
+			title: "The Quiz is finished! \nYour Score is " + score,
+			text: "Well Done",
+			confirmButtonText: "Play Again",
 		});
 		setTimeout(() => {
 			this.props.history.push("/play/instructions");
-		}, 1000);
+		}, 3000);
 	};
 
 	render() {
-		console.log(questions);
+		//console.log(questions);
 		const {
 			currentQuestion,
 			currentQuestionIndex,
@@ -262,7 +270,7 @@ class Quiz extends React.Component {
 			previousButtonDisabled,
 			nextButtonDisabled,
 		} = this.state;
-		console.log(currentQuestion);
+		//console.log(currentQuestion);
 		//console.log(this.state.currentQuestionIndex);
 		return (
 			<Fragment>
@@ -271,6 +279,7 @@ class Quiz extends React.Component {
 				</Helmet>
 				<div className="container">
 					<div className="questions">
+						{/* Countdown Timer */}
 						<h1>
 							{time.minutes}:{time.seconds}
 						</h1>
@@ -293,7 +302,6 @@ class Quiz extends React.Component {
 								{currentQuestion.optionD}
 							</p>
 						</div>
-
 						<div className="button-container mt-3">
 							<button
 								id="preivous-btn"

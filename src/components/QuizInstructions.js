@@ -16,7 +16,11 @@ const QuizInstructions = () => {
 						Take the quiz!
 					</button>
 				</Link>
-				<button className="btn btn-outline-secondary ml-2">Take me back</button>
+				<Link to="/">
+					<button className="btn btn-outline-secondary ml-2">
+						Take me back
+					</button>
+				</Link>
 			</div>
 		</Fragment>
 	);
