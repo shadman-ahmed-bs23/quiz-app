@@ -12,17 +12,23 @@ const Home = () => (
 		</Helmet>
 
 		<div className="home">
-			<h1 className="text-center mt-5">Quiz App</h1>
+			<h1 className="text-center">Quiz App</h1>
 
-			<Link to="/play/instructions">
-				<button className="btn btn-primary ml-5">Play</button>
-			</Link>
-			<Link to="/login">
-				<button className="btn btn-info ml-5">Login</button>
-			</Link>
-			<Link to="/signup">
-				<button className="btn btn-secondary ml-5">Sign Up</button>
-			</Link>
+			<div className="play-div text-center">
+				<Link to="/play/instructions">
+					<button className="btn btn-primary">Play</button>
+				</Link>
+			</div>
+			<div className="login-div mt-5	text-center">
+				<h3>Want to add custom quiz? </h3>
+
+				<Link to="/login">
+					<button className="btn btn-info mr-2">Login</button>
+				</Link>
+				<Link to="/signup">
+					<button className="btn btn-secondary ml-2">Sign Up</button>
+				</Link>
+			</div>
 		</div>
 	</Fragment>
 );

@@ -26,9 +26,15 @@ li {
 }
 
 .home {
-	height: 100vh;
-	text-align: center;
-	margin: 0px auto;
+	background-color: #ededed;
+	display: flex;
+	min-height: 100vh;
+	width: 100%;
+	margin: auto;
+	padding: 0;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .questions {
