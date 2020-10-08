@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
+import React, { Fragment } from "react";
+
 import { Helmet } from "react-helmet";
 
 import questions from "./../questions.json";
@@ -30,7 +30,6 @@ class Quiz extends React.Component {
 			currentQuestion,
 			nextQuestion,
 			previousQuestion,
-			score,
 		} = this.state;
 		this.displayQuestions(
 			questions,

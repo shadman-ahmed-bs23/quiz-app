@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -10,7 +10,10 @@ const QuizInstructions = () => {
 			</Helmet>
 			<div className="container text-center">
 				<h1 className="text-center mt-5">Play a simple quiz</h1>
-				<h3 className="text-center mt-5">There are no instructions actually</h3>
+				<h5 className="text-center mt-5">
+					There are five Questions, each one have 4 options, you can choose only
+					one option.
+				</h5>
 				<Link to="/play/quiz">
 					<button className="btn btn-outline-success mr-2">
 						Take the quiz!

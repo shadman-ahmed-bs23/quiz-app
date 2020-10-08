@@ -61,3 +61,11 @@ li {
 	box-shadow: none;
 	pointer-events: none;
 }
+
+.form-div {
+	margin: 50px auto;
+	background-color: #ededed;
+
+	padding: 30px;
+	width: 40%;
+}

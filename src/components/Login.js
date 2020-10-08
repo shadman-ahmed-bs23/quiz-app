@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import firebaseAuth from "./firebaseAuth";
 
+import "./../App.css";
 class Login extends React.Component {
 	state = {
 		email: "",
@@ -40,28 +41,41 @@ class Login extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h1>Login Component</h1>
-				<form>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						placeholder="Enter your email Address"
-						onChange={this.handleChange}
-						value={this.state.email}
-					/>
-					<input
-						type="password"
-						id="password"
-						name="password"
-						placeholder="Enter your Password"
-						onChange={this.handleChange}
-						value={this.state.password}
-					/>
-					<button onClick={this.loginUser}>Login</button>
-					<button onClick={this.signUpUser}>SignUp</button>
-				</form>
+			<div className="container">
+				<h1 className="text-center mt-5">Login</h1>
+				<div className="form-div">
+					<form>
+						<div class="form-group">
+							<label htmlFor="email">Email address</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								className="form-control"
+								placeholder="Enter your email Address"
+								onChange={this.handleChange}
+								value={this.state.email}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="Password">Password</label>
+							<input
+								type="password"
+								id="password"
+								name="password"
+								className="form-control"
+								placeholder="Enter your Password"
+								onChange={this.handleChange}
+								value={this.state.password}
+							/>
+						</div>
+						<div className="text-center">
+							<button onClick={this.loginUser} className="btn btn-primary">
+								Login
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		);
 	}

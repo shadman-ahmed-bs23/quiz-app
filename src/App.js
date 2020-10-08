@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 //Importing CSS
 import "./App.css";
 
 //Importing Components
-import Nav from "./components/Nav";
+
 import Login from "./components/Login";
 import Quiz from "./components/Quiz";
 import AddQuiz from "./components/AddQuiz";
@@ -12,7 +12,7 @@ import Home from "./components/Home";
 import QuizInstructions from "./components/QuizInstructions";
 
 //Importing from react router
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
 	return (

@@ -36,7 +36,12 @@ const AddQuiz = ({
 				<form>
 					<div className="form-group">
 						<label htmlFor="questionText">Question</label>
-						<input type="text" className="form-control" id="questionText" />
+						<input
+							type="text"
+							onChange={questionHandler}
+							className="form-control"
+							id="questionText"
+						/>
 					</div>
 					<div className="form-group option">
 						<label htmlFor="option1">Option 1</label>
