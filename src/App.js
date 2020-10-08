@@ -10,6 +10,7 @@ import Quiz from "./components/Quiz";
 import AddQuiz from "./components/AddQuiz";
 import Home from "./components/Home";
 import QuizInstructions from "./components/QuizInstructions";
+import SignUp from "./components/SignUp";
 
 //Importing from react router
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -33,6 +34,7 @@ function App() {
 			<Route path="/play/instructions" exact component={QuizInstructions} />
 			<Route path="/play/quiz" exact component={Quiz} />
 			<Route path="/login" exact component={Login} />
+			<Route path="/signup" exact component={SignUp} />
 			<Route path="/add-quiz-2" exact component={AddQuiz} />
 		</Router>
 	);

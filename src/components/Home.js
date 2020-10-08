@@ -20,7 +20,7 @@ const Home = () => (
 			<Link to="/login">
 				<button className="btn btn-info ml-5">Login</button>
 			</Link>
-			<Link to="/register">
+			<Link to="/signup">
 				<button className="btn btn-secondary ml-5">Sign Up</button>
 			</Link>
 		</div>

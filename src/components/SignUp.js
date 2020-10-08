@@ -3,36 +3,35 @@ import firebaseAuth from "./firebaseAuth";
 import { Link } from "react-router-dom";
 
 import "./../App.css";
-class Login extends React.Component {
+
+class SignUp extends React.Component {
 	state = {
 		email: "",
 		password: "",
 	};
 
-	loginUser = (e) => {
+	signUpUser = (e) => {
 		e.preventDefault();
 		firebaseAuth
 			.auth()
-			.signInWithEmailAndPassword(this.state.email, this.state.password)
+			.createUserWithEmailAndPassword(this.state.email, this.state.password)
 			.then((user) => {
 				console.log(user);
-				this.props.history.push("/add-quiz-2");
+				this.props.history.push("/login");
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
-
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
 	};
-
 	render() {
 		return (
 			<div className="container">
-				<h1 className="text-center mt-5">Login</h1>
+				<h1 className="text-center mt-5">Sign Up</h1>
 				<div className="form-div">
 					<form>
 						<div class="form-group">
@@ -60,13 +59,13 @@ class Login extends React.Component {
 							/>
 						</div>
 						<div className="text-center">
-							<button onClick={this.loginUser} className="btn btn-primary">
-								Login
+							<button onClick={this.signUpUser} className="btn btn-info">
+								Sign Up
 							</button>
 						</div>
 						<p className="mt-5 text-center">
-							Don't have an account?
-							<Link to="/signup"> SignUp</Link>
+							Already have an account?
+							<Link to="/login"> Login</Link>
 						</p>
 					</form>
 				</div>
@@ -74,5 +73,4 @@ class Login extends React.Component {
 		);
 	}
 }
-
-export default Login;
+export default SignUp;
