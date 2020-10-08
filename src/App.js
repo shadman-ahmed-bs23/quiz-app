@@ -32,6 +32,8 @@ function App() {
 			<Route path="/" exact component={Home} />
 			<Route path="/play/instructions" exact component={QuizInstructions} />
 			<Route path="/play/quiz" exact component={Quiz} />
+			<Route path="/login" exact component={Login} />
+			<Route path="/add-quiz-2" exact component={AddQuiz} />
 		</Router>
 	);
 }
