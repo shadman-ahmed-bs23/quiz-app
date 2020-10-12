@@ -263,13 +263,15 @@ class Quiz extends React.Component {
 	render() {
 		//console.log(questions);
 		const {
+			questions,
 			currentQuestion,
 			currentQuestionIndex,
 			time,
 			previousButtonDisabled,
 			nextButtonDisabled,
 		} = this.state;
-		//console.log(currentQuestion);
+		console.log(currentQuestion);
+		console.log(questions);
 		//console.log(this.state.currentQuestionIndex);
 		return (
 			<Fragment>

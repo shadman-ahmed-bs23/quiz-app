@@ -1,65 +1,47 @@
 import React from "react";
 import "./../App.css";
+import firebaseAuth from './firebaseAuth';
 
-const AddQuiz = ({
-	question,
-	setQuestion,
-	option1,
-	option2,
-	option3,
-	option4,
-	setOption1,
-	setOption2,
-	setOption3,
-	setOption4,
-	answer,
-	setAnswer,
-}) => {
-	const questionHandler = (e) => {
-		console.log(e.target.value);
-		setQuestion(e.target.value);
-	};
-	return (
-		<div className="AddQuiz container">
-			<h3>Add Quiz Component</h3>
+class AddQuiz extends React.Component {
+	state = {visible: false, topicName: ''}
 
-			<form>
-				<input
-					value={question}
-					onChange={(e) => {
-						this.setQuestion(e.target.value);
-					}}
-					type="text"
-				/>
-			</form>
-			<div className="formDiv">
-				<form>
-					<div className="form-group">
-						<label htmlFor="questionText">Question</label>
-						<input
-							type="text"
-							onChange={questionHandler}
-							className="form-control"
-							id="questionText"
-						/>
-					</div>
-					<div className="form-group option">
-						<label htmlFor="option1">Option 1</label>
-						<input type="text" className="form-control" id="option1" />
-						<label htmlFor="option1">Option 2</label>
-						<input type="text" className="form-control" id="option2" />
-						<label htmlFor="option1">Option 3</label>
-						<input type="text" className="form-control" id="option3" />
-						<label htmlFor="option1">Option 4</label>
-						<input type="text" className="form-control" id="option4" />
-					</div>
-					<button type="submit" className="btn btn-primary">
-						Submit
-					</button>
-				</form>
+	handleChange = (e) => {
+		console.log(e.target.value); 
+		this.setState({topicName: e.target.value});
+	}
+	saveQuizTopic = (e) => {
+		e.preventDefault(); 
+		console.log("Next Button Clicked"); 
+		this.setState({visible: true}); 
+		firebaseAuth.db
+			.collection("quizzes")
+			.add({topicName: this.state.topicName})
+			.then((docRef) => {
+				console.log(docRef.id); 
+				//this.setState({topicName: ''});
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	}
+	render() { 
+		return (
+			<div className="AddQuiz container">
+				<h3 className="text-center mt-5">Add Custom Quiz</h3>
+				<div className="form-group">
+					<label htmlFor="topicName">Name of the Topic of Quiz</label>
+					<input 
+						type="text" 
+						className="form-control" 
+						name="topicName"
+						value={this.state.topicName}
+						onChange={this.handleChange}/>
+				</div>
+				<button className="btn btn-primary" onClick={this.saveQuizTopic}>Next</button>
+				{this.state.visible ? <div>Quiz Form </div> : null}
 			</div>
-		</div>
-	);
+		);
+	}
 };
 
 export default AddQuiz;
