@@ -19,6 +19,7 @@ class Login extends React.Component {
 				this.props.history.push("/add-quiz-2");
 			})
 			.catch((err) => {
+				alert(err);
 				console.log(err);
 			});
 	};
@@ -60,7 +61,7 @@ class Login extends React.Component {
 							/>
 						</div>
 						<div className="text-center">
-							<button onClick={this.loginUser} className="btn btn-primary">
+							<button type="button" onClick={this.loginUser} className="btn btn-primary">
 								Login
 							</button>
 						</div>

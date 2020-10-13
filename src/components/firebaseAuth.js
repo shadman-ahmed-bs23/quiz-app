@@ -1,4 +1,6 @@
 import firebase from "firebase";
+import "firebase/firestore"; 
+import "firebase/app";
 var firebaseConfig = {
 	apiKey: "AIzaSyCAaRVNwMrtKVT7d_PRqdEDKhZEU-ZH1K4",
 	authDomain: "fir-with-react-b683e.firebaseapp.com",
@@ -11,7 +13,4 @@ var firebaseConfig = {
 // Initialize Firebase
 const firebaseAuth = firebase.initializeApp(firebaseConfig);
 
-
-let db = firebase.firestore();
-
-export default { firebaseAuth, db };
+export default firebaseAuth;

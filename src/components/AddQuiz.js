@@ -1,9 +1,17 @@
 import React from "react";
 import "./../App.css";
+import firebase from 'firebase'; 
+import 'firebase/firestore'; 
 import firebaseAuth from './firebaseAuth';
 
+//Importing Components
+import QuizForm from "./QuizForm"; 
+
 class AddQuiz extends React.Component {
-	state = {visible: false, topicName: ''}
+	state = {
+		visible: false, 
+		topicName: ''
+	}
 
 	handleChange = (e) => {
 		console.log(e.target.value); 
@@ -13,7 +21,10 @@ class AddQuiz extends React.Component {
 		e.preventDefault(); 
 		console.log("Next Button Clicked"); 
 		this.setState({visible: true}); 
-		firebaseAuth.db
+
+		let firestore = firebaseAuth.firestore();
+
+		firestore
 			.collection("quizzes")
 			.add({topicName: this.state.topicName})
 			.then((docRef) => {
@@ -38,7 +49,7 @@ class AddQuiz extends React.Component {
 						onChange={this.handleChange}/>
 				</div>
 				<button className="btn btn-primary" onClick={this.saveQuizTopic}>Next</button>
-				{this.state.visible ? <div>Quiz Form </div> : null}
+				{this.state.visible ? <QuizForm topicName={this.state.topicName}/> : null}
 			</div>
 		);
 	}
