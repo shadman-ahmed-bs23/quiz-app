@@ -11,6 +11,7 @@ import AddQuiz from "./components/AddQuiz";
 import Home from "./components/Home";
 import QuizInstructions from "./components/QuizInstructions";
 import SignUp from "./components/SignUp";
+import Result from "./components/Result";
 
 import firebase from 'firebase'; 
 import "firebase/firestore"
@@ -24,19 +25,6 @@ function App() {
 	
 
 	return (
-		/*
-		<Router>
-			<div className="App">
-				<Nav />
-				<Switch>
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/quiz" component={Quiz} />
-					<Route exact path="/add-quiz" component={AddQuiz} />
-				</Switch>
-			</div>
-		</Router>
-		*/
-		
 		
 		<Router basename="/quiz-app">
 			<Route path="/" exact component={Home} />
@@ -45,6 +33,7 @@ function App() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/signup" exact component={SignUp} />
 			<Route path="/add-quiz-2" exact component={AddQuiz} />
+			<Route path="/results" exact component={Result} />
 		</Router>
 	);
 }

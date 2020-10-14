@@ -291,15 +291,28 @@ class Quiz extends React.Component {
 
 	endQuiz = (score) => {
 		const MySwal = withReactContent(Swal);
+		localStorage.setItem("score", score);
 		console.log(score);
 		MySwal.fire({
 			title: "The Quiz is finished! \nYour Score is " + score,
-			text: "Well Done",
-			confirmButtonText: "Play Again",
+			input: 'text',
+			inputLabel: "Your name:", 
+			showCancelButton: true, 
+			inputPlaceholder: "Enter your name", 
+			inputValidator: (value) => {
+				if(!value) {
+					return 'You need to write something!'
+				}
+				else {
+					localStorage.setItem("name", value); 
+					alert("your name: " + value); 
+					setTimeout(() => {
+						window.location.assign('/results')
+					}, 2000); 
+				}
+			}
 		});
-		setTimeout(() => {
-			window.location.assign('/play/instructions')
-		}, 3000);
+		
 	};
 
 	render() {

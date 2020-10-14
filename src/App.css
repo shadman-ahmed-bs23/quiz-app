@@ -87,3 +87,11 @@ li {
 }
 
 /***** QuizInstruction.js *********/
+
+/***** Result.js ********/
+.list-group {
+	margin: 0 auto;
+	width: 50%;
+}
+
+/***** Result.js ********/
