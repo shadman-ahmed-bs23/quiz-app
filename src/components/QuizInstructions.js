@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import "./../App.css"
 
 import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
@@ -32,8 +33,8 @@ const QuizInstructions = () => {
 				<h4 className="text-center">Choose quiz topic:</h4>
 				{topics.map(doc => (
 					<div key={doc.id}>
-						<button className="btn btn-outline-light mb-3">
-							<Link to={`/play/quiz/${doc.id}`}> {doc.data().topicName} </Link>
+						<button className="btn btn-outline-success mb-3">
+							<Link to={`/play/quiz/${doc.id}`} className="btn-link"> {doc.data().topicName} </Link>
 						</button>
 					</div>
 				))}
@@ -41,11 +42,7 @@ const QuizInstructions = () => {
 					There are five Questions for each topic, each one have 4 options, you can choose only
 					one option.
 				</h5>
-				<Link to="/play/quiz">
-					<button className="btn btn-outline-success mr-2">
-						Take the quiz!
-					</button>
-				</Link>
+				
 				<Link to="/">
 					<button className="btn btn-outline-secondary ml-2">
 						Take me back

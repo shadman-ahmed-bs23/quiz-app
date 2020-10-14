@@ -75,3 +75,15 @@ li {
 	padding: 30px;
 	width: 40%;
 }
+
+/***** QuizInstruction.js **********/
+
+.btn-link {
+	color: green !important;
+	text-decoration: none !important;
+}
+.btn-link:hover {
+	color: white !important;
+}
+
+/***** QuizInstruction.js *********/
