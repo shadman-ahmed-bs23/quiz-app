@@ -2,15 +2,19 @@ import React, { Fragment } from "react";
 
 import { Helmet } from "react-helmet";
 
-import questions from "./../questions.json";
+//import questions from "./../questions.json";
 import isEmpty from "./../is-empty.js";
+
+import firebase from 'firebase'; 
+import "firebase/firestore"
+import firebaseAuth from './firebaseAuth';
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 class Quiz extends React.Component {
 	state = {
-		questions,
+		questions: [],
 		currentQuestion: {},
 		nextQuestion: {},
 		previousQuestion: {},
@@ -24,7 +28,43 @@ class Quiz extends React.Component {
 		previousButtonDisabled: true,
 		time: {},
 	};
-	componentDidMount() {
+	async componentDidMount() {
+		
+		let firestore = firebaseAuth.firestore();
+		var questionArray = [];
+		const response =  await firestore
+															.collection("Real Madrid")
+															.doc("Real Madrid")
+															.get()
+															.then(function(doc) {
+																return doc.data().questions;
+															});
+		console.log(response); 
+		this.setState({
+			questions: response
+		})
+		/*
+		let collectionName = "Real Madrid"; 
+		let docName = "Real Madrid"; 
+		
+		async function getValues() {
+			let doc = await firestore.collection("Real Madrid").doc("Real Madrid").get(); 
+			if(doc.exists) {
+				return  doc.data().questions; 
+			}
+			throw new Error("No Such Dcoument");
+		}
+		
+		
+		var promise = getValues();
+		promise.then(questions => {
+			this.setState({
+				questions: questions
+			});
+		});
+		*/
+		
+		console.log(this.state.questions);
 		const {
 			questions,
 			currentQuestion,
@@ -47,9 +87,11 @@ class Quiz extends React.Component {
 		previousQuestion
 	) => {
 		let { currentQuestionIndex } = this.state;
+		console.log(this.state.questions)
 		if (!isEmpty(this.state.questions)) {
 			questions = this.state.questions;
 			currentQuestion = questions[currentQuestionIndex];
+			console.log(currentQuestion);
 			nextQuestion = questions[currentQuestionIndex + 1];
 			previousQuestion = questions[currentQuestionIndex - 1];
 			const answer = currentQuestion.answer;
@@ -140,7 +182,7 @@ class Quiz extends React.Component {
 		//For Next button
 		if (
 			this.state.nextQuestion === undefined ||
-			this.state.currentQuestionIndex + 1 === 15
+			this.state.currentQuestionIndex + 1 === 5
 		) {
 			this.setState({
 				nextButtonDisabled: true,
@@ -155,7 +197,7 @@ class Quiz extends React.Component {
 	//Function for selecting correct answer
 	correctAnswer = () => {
 		const MySwal = withReactContent(Swal);
-		//return MySwal.fire(<p>Shorthand works too</p>);
+		
 		MySwal.fire({
 			icon: "success",
 			title: "Answer is Correct",
@@ -256,12 +298,12 @@ class Quiz extends React.Component {
 			confirmButtonText: "Play Again",
 		});
 		setTimeout(() => {
-			this.props.history.push("/play/instructions");
+			window.location.assign('/play/instructions')
 		}, 3000);
 	};
 
 	render() {
-		//console.log(questions);
+		console.log(this.props.questions);
 		const {
 			questions,
 			currentQuestion,

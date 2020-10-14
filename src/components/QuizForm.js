@@ -45,6 +45,11 @@ class QuizForm extends React.Component {
     const optionC = this.optionC.value; 
     const optionD = this.optionD.value; 
     const answer = this.answer.value; 
+    if(question === '' || answer === '' || optionA === '' || optionB === '' || optionC === '' || optionD ==='') {
+      console.log("Empty"); 
+      alert("Form can't be empty!"); 
+      window.location.reload();
+    }
     this.question.value = ''; 
     this.optionA.value = ''; 
     this.optionB.value = ''; 
@@ -59,35 +64,11 @@ class QuizForm extends React.Component {
       optionD: optionD,
       answer: answer 
     }
-    /*
     
-    let obj = {...prevState.questions}; 
-      obj.question = question; 
-      obj.optionA = optionA; 
-      obj.optionB = optionB; 
-      obj.optionC = optionC; 
-      obj.optionD = optionD; 
-      obj.answer = answer; 
-    */
-    console.log(obj);
-    this.setState({
-      questions: {
-        question: question, 
-        optionA: optionA, 
-        optionB: optionB, 
-        optionC: optionC, 
-        optionD: optionD,
-        answer: answer 
-        }
-      }
-    )
-    console.log(this.state.questions);
-
+    
     // Firebase firestore config
     let firestore = firebaseAuth.firestore();
 
-    
-     
     //Creating a empty collection with "questions" array
     if(this.state.number === 0) {
       //console.log("I am in");
@@ -131,10 +112,7 @@ class QuizForm extends React.Component {
               console.log("error writing docs,", error); 
             });
         });
-      }
-
-     
-      
+      }      
   }
   render() {
     //console.log("from the form component", this.props.topicName); 
