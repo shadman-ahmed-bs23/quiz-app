@@ -13,10 +13,6 @@ import QuizInstructions from "./components/QuizInstructions";
 import SignUp from "./components/SignUp";
 import Result from "./components/Result";
 
-import firebase from 'firebase'; 
-import "firebase/firestore"
-import firebaseAuth from './components/firebaseAuth';
-
 //Importing from react router
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

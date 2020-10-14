@@ -19,6 +19,11 @@ const Home = () => (
 					<button className="btn btn-primary">Play</button>
 				</Link>
 			</div>
+			<div className="result-div text-center mt-3">
+				<Link to="/results">
+					<button className="btn btn-outline-success">Results</button>
+				</Link>
+			</div>
 			<div className="login-div mt-5	text-center">
 				<h3>Want to add custom quiz? </h3>
 

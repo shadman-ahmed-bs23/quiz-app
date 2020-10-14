@@ -4,8 +4,6 @@ import { Helmet } from "react-helmet";
 
 //import questions from "./../questions.json";
 import isEmpty from "./../is-empty.js";
-
-import firebase from 'firebase'; 
 import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
@@ -31,7 +29,6 @@ class Quiz extends React.Component {
 	async componentDidMount() {
 		console.log(this.props.match.params.id);
 		let firestore = firebaseAuth.firestore();
-		var questionArray = [];
 		const response =  await firestore
 															.collection(this.props.match.params.id)
 															.doc(this.props.match.params.id)
@@ -305,9 +302,8 @@ class Quiz extends React.Component {
 				}
 				else {
 					localStorage.setItem("name", value); 
-					alert("your name: " + value); 
 					setTimeout(() => {
-						window.location.assign('/results')
+						window.location.assign('/quiz-app/results')
 					}, 2000); 
 				}
 			}

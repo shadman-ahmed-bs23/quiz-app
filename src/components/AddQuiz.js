@@ -1,6 +1,5 @@
 import React from "react";
 import "./../App.css";
-import firebase from 'firebase'; 
 import 'firebase/firestore'; 
 import firebaseAuth from './firebaseAuth';
 
@@ -10,7 +9,25 @@ import QuizForm from "./QuizForm";
 class AddQuiz extends React.Component {
 	state = {
 		visible: false, 
-		topicName: ''
+		topicName: '', 
+		user: {}
+	};
+	
+	componentDidMount() {
+		this.authListener();
+	}
+	authListener() {
+		firebaseAuth.auth().onAuthStateChanged((user) => {
+			if (user) {
+				this.setState({ user });
+			} else {
+				this.setState({ user: null });
+				window.location.assign("/login");
+			}
+		});
+	}
+	logout() {
+		firebaseAuth.auth().signOut();
 	}
 
 	handleChange = (e) => {
@@ -40,6 +57,7 @@ class AddQuiz extends React.Component {
 	render() { 
 		return (
 			<div className="AddQuiz container">
+				<button className="btn btn-danger logout" onClick={this.logout}>Logout</button>
 				<h3 className="text-center mt-5">Add Custom Quiz</h3>
 				<div className="form-group">
 					<label htmlFor="topicName">Name of the Topic of Quiz</label>

@@ -7,20 +7,22 @@ import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
 const QuizInstructions = () => {
+	const [topics, setTopics] = useState([]); 
+	
 	useEffect (() => {
-		fetchTopics(); 
+		let firestore = firebaseAuth.firestore();
+		const fetchTopics = async () => {
+			const data = await firestore
+													.collection("quizzes")
+													.get();
+										
+			console.log(data.docs.map(doc=> doc.id));
+			setTopics(data.docs);
+		};
+		fetchTopics();
 	}, []); 
 
-	const [topics, setTopics] = useState([]); 
-	let firestore = firebaseAuth.firestore();
-	const fetchTopics = async () => {
-		const data = await firestore
-												.collection("quizzes")
-												.get();
-									 
-		console.log(data.docs.map(doc=> doc.id));
-		setTopics(data.docs);
-	}
+	
 	return (
 		<Fragment>
 			<Helmet>

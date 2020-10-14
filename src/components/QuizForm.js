@@ -1,6 +1,4 @@
-import React from 'react' 
-import { browserHistory, Link } from "react-router-dom";
-import firebase from 'firebase'; 
+import React from 'react'  
 import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
@@ -31,7 +29,7 @@ class QuizForm extends React.Component {
       )
     }
     else {
-      window.location.assign('/');
+      window.location.assign('/quiz-app');
     }
 
   }
@@ -86,7 +84,6 @@ class QuizForm extends React.Component {
         }); 
     } else {
       var questionArray = [];
-      let questionObj = this.state.questions;
       //Storing question into firestore
       firestore
         .collection(this.props.topicName)
