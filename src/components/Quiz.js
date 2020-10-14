@@ -29,12 +29,12 @@ class Quiz extends React.Component {
 		time: {},
 	};
 	async componentDidMount() {
-		
+		console.log(this.props.match.params.id);
 		let firestore = firebaseAuth.firestore();
 		var questionArray = [];
 		const response =  await firestore
-															.collection("Real Madrid")
-															.doc("Real Madrid")
+															.collection(this.props.match.params.id)
+															.doc(this.props.match.params.id)
 															.get()
 															.then(function(doc) {
 																return doc.data().questions;
@@ -303,7 +303,7 @@ class Quiz extends React.Component {
 	};
 
 	render() {
-		console.log(this.props.questions);
+		console.log(this.props.match.params.id);
 		const {
 			questions,
 			currentQuestion,

@@ -41,7 +41,7 @@ function App() {
 		<Router basename="/quiz-app">
 			<Route path="/" exact component={Home} />
 			<Route path="/play/instructions" exact component={QuizInstructions} />
-			<Route path="/play/quiz" exact render={() => <Quiz questions={"Real Madrid"}/> } />
+			<Route path="/play/quiz/:id" exact component={Quiz} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/signup" exact component={SignUp} />
 			<Route path="/add-quiz-2" exact component={AddQuiz} />

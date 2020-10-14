@@ -26,10 +26,12 @@ class AddQuiz extends React.Component {
 
 		firestore
 			.collection("quizzes")
-			.add({topicName: this.state.topicName})
-			.then((docRef) => {
-				console.log(docRef.id); 
-				//this.setState({topicName: ''});
+			.doc(this.state.topicName)
+			.set({
+				topicName: this.state.topicName
+			})
+			.then(function () {
+				console.log("Topic Added");
 			})
 			.catch((error) => {
 				console.log(error.message);
