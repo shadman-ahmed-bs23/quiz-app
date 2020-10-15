@@ -1,16 +1,19 @@
 import React, { Fragment } from "react";
-
 import { Helmet } from "react-helmet";
 
-//import questions from "./../questions.json";
 import isEmpty from "./../is-empty.js";
+
+//importing firebase config
 import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
+//Importing SweetAlert
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 class Quiz extends React.Component {
+
+	//State
 	state = {
 		questions: [],
 		currentQuestion: {},
@@ -26,6 +29,8 @@ class Quiz extends React.Component {
 		previousButtonDisabled: true,
 		time: {},
 	};
+
+	//Life Cycle Methods
 	async componentDidMount() {
 		console.log(this.props.match.params.id);
 		let firestore = firebaseAuth.firestore();
@@ -40,26 +45,6 @@ class Quiz extends React.Component {
 		this.setState({
 			questions: response
 		})
-		/*
-		let collectionName = "Real Madrid"; 
-		let docName = "Real Madrid"; 
-		
-		async function getValues() {
-			let doc = await firestore.collection("Real Madrid").doc("Real Madrid").get(); 
-			if(doc.exists) {
-				return  doc.data().questions; 
-			}
-			throw new Error("No Such Dcoument");
-		}
-		
-		
-		var promise = getValues();
-		promise.then(questions => {
-			this.setState({
-				questions: questions
-			});
-		});
-		*/
 		
 		console.log(this.state.questions);
 		const {
@@ -76,7 +61,7 @@ class Quiz extends React.Component {
 		);
 		this.startTimer();
 	}
-	//Displaying all quiz question
+	//Displaying quiz questions
 	displayQuestions = (
 		questions = this.state.questions,
 		currentQuestion,
@@ -112,15 +97,6 @@ class Quiz extends React.Component {
 		} else {
 			this.wrongAnswer();
 		}
-	};
-	showAlert = () => {
-		const MySwal = withReactContent(Swal);
-
-		return MySwal.fire({
-			icon: "success",
-			title: "Answer Taken",
-			confirmButtonText: "Sure",
-		});
 	};
 	//Handle next button
 	handleNextButtonClick = (e) => {
@@ -159,7 +135,25 @@ class Quiz extends React.Component {
 		}
 	};
 	//Handle Quit Button
-	//handleQuitButtonClick = (e) => {}
+	handleQuitButton = (e) => {
+		const MySwal = withReactContent(Swal);
+		MySwal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Go to Home'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire(
+					'Redirecting to home!'
+				)
+				window.location.assign('/quiz-app/');
+			}
+		});
+	}
 
 	//Disabling previous and next button when necessary
 	handleDisableButton = () => {
@@ -285,7 +279,7 @@ class Quiz extends React.Component {
 			}
 		}, 1000);
 	}
-
+	//Function to end the quiz with score and name
 	endQuiz = (score) => {
 		const MySwal = withReactContent(Swal);
 		localStorage.setItem("score", score);
@@ -312,7 +306,7 @@ class Quiz extends React.Component {
 	};
 
 	render() {
-		console.log(this.props.match.params.id);
+		//console.log(this.props.match.params.id);
 		const {
 			questions,
 			currentQuestion,
@@ -321,9 +315,7 @@ class Quiz extends React.Component {
 			previousButtonDisabled,
 			nextButtonDisabled,
 		} = this.state;
-		console.log(currentQuestion);
-		console.log(questions);
-		//console.log(this.state.currentQuestionIndex);
+		
 		return (
 			<Fragment>
 				<Helmet>
@@ -335,6 +327,7 @@ class Quiz extends React.Component {
 						<h1>
 							{time.minutes}:{time.seconds}
 						</h1>
+						
 						<h5>
 							{currentQuestionIndex + 1}. {currentQuestion.question}
 						</h5>
@@ -373,7 +366,10 @@ class Quiz extends React.Component {
 							>
 								Next
 							</button>
-							<button id="quit-btn" className="btn btn-danger mr-2">
+							<button 
+								id="quit-btn" 
+								className="btn btn-danger mr-2"
+								onClick={this.handleQuitButton}>
 								Quit
 							</button>
 						</div>

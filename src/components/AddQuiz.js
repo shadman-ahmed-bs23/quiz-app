@@ -7,33 +7,43 @@ import firebaseAuth from './firebaseAuth';
 import QuizForm from "./QuizForm"; 
 
 class AddQuiz extends React.Component {
+	
+	//States
 	state = {
 		visible: false, 
 		topicName: '', 
 		user: {}
 	};
 	
+	//Life Cycle Methods
 	componentDidMount() {
 		this.authListener();
 	}
+
+	//Authenticating users
 	authListener() {
 		firebaseAuth.auth().onAuthStateChanged((user) => {
 			if (user) {
 				this.setState({ user });
 			} else {
 				this.setState({ user: null });
-				window.location.assign("/login");
+				window.location.assign('/quiz-app/login')
 			}
 		});
 	}
+
+	//Logout function
 	logout() {
 		firebaseAuth.auth().signOut();
 	}
 
+	//Input handler 
 	handleChange = (e) => {
 		console.log(e.target.value); 
 		this.setState({topicName: e.target.value});
 	}
+
+	//Storing the name of the quiz 
 	saveQuizTopic = (e) => {
 		e.preventDefault(); 
 		console.log("Next Button Clicked"); 

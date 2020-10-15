@@ -3,6 +3,7 @@ body {
 	font-family: "Montserrat", sans-serif;
 }
 
+/*********** Nav.js **********/
 nav {
 	display: flex;
 	justify-content: space-around;
@@ -20,11 +21,14 @@ nav {
 	align-items: center;
 	list-style: none;
 }
+
 li {
 	color: #fff !important;
 	text-decoration: none !important;
 }
+/******  Nav.js *********/
 
+/********* Home.js ********/
 .home {
 	background-color: #ededed;
 	display: flex;
@@ -36,7 +40,9 @@ li {
 	justify-content: center;
 	flex-direction: column;
 }
+/********** Home.js *******/
 
+/******** Quiz.js *********/
 .questions {
 	margin-top: 20px;
 	text-align: center;
@@ -67,17 +73,18 @@ li {
 	box-shadow: none;
 	pointer-events: none;
 }
+/******** Quiz.js *********/
 
+/******** AddQuiz.js ********/
 .form-div {
 	margin: 50px auto;
 	background-color: #ededed;
-
 	padding: 30px;
 	width: 40%;
 }
+/********** AddQui.js *******/
 
 /***** QuizInstruction.js **********/
-
 .btn-link {
 	color: green !important;
 	text-decoration: none !important;
@@ -85,7 +92,6 @@ li {
 .btn-link:hover {
 	color: white !important;
 }
-
 /***** QuizInstruction.js *********/
 
 /***** Result.js ********/
@@ -93,11 +99,9 @@ li {
 	margin: 0 auto;
 	width: 50%;
 }
-
 /***** Result.js ********/
 
 /***** AddQuiz.js ********/
-
 .logout {
 	margin-top: 1px;
 	margin-right: 2px;
@@ -105,5 +109,4 @@ li {
 	top: 0;
 	right: 0;
 }
-
 /***** AddQuiz.js ********/

@@ -1,12 +1,12 @@
-import React from 'react'  
+import React from 'react' 
+
+//Importing Firebase config
 import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
 
 class QuizForm extends React.Component {
-  initState = {
-    questionObj: {question: 'Another Question?', optionA: 'Arteta', optionB: 'Bale', optionC: 'Cristiano', optionD: 'Dani', answer: 'Cristiano'}
-  }
+  //States
   state = {
     number: 0, 
     questions: {
@@ -18,10 +18,9 @@ class QuizForm extends React.Component {
       answer: 'Cristiano'
     }
   }
+  //Displaying the number of questions above the form
   showNumber = () => {
     if(this.state.number < 5) {
-      console.log(this.state.number);
-
       return (
         <div>
           {this.state.number + 1} No. question out of 5 Questions
@@ -31,29 +30,34 @@ class QuizForm extends React.Component {
     else {
       window.location.assign('/quiz-app');
     }
-
   }
   
   
   nextQuestion = (e) => {
     e.preventDefault();
+
+    //Getting value from the form inputs
     const question = this.question.value; 
     const optionA = this.optionA.value;
     const optionB = this.optionB.value;  
     const optionC = this.optionC.value; 
     const optionD = this.optionD.value; 
     const answer = this.answer.value; 
+    //Form Validattor
     if(question === '' || answer === '' || optionA === '' || optionB === '' || optionC === '' || optionD ==='') {
       console.log("Empty"); 
       alert("Form can't be empty!"); 
       window.location.reload();
     }
+
+    //Resetting the form
     this.question.value = ''; 
     this.optionA.value = ''; 
     this.optionB.value = ''; 
     this.optionC.value = ''; 
     this.optionD.value = ''; 
     this.answer.value = ''; 
+    //Input Question Object
     const obj = {
       question: question, 
       optionA: optionA, 
@@ -67,9 +71,8 @@ class QuizForm extends React.Component {
     // Firebase firestore config
     let firestore = firebaseAuth.firestore();
 
-    //Creating a empty collection with "questions" array
+    //Creating a empty collection in firestore with "questions" array
     if(this.state.number === 0) {
-      //console.log("I am in");
       firestore
         .collection(this.props.topicName)
         .doc(this.props.topicName)
@@ -111,12 +114,9 @@ class QuizForm extends React.Component {
         });
       }      
   }
-  render() {
-    //console.log("from the form component", this.props.topicName); 
-    
+  render() { 
     return (
       <div>
-        
         {this.showNumber()} 
         <form onSubmit={this.nextQuestion}>
           <div className="form-group">

@@ -7,8 +7,11 @@ import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
 const QuizInstructions = () => {
+
+	//States
 	const [topics, setTopics] = useState([]); 
 	
+	//UseEffect
 	useEffect (() => {
 		let firestore = firebaseAuth.firestore();
 		const fetchTopics = async () => {

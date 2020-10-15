@@ -4,7 +4,6 @@ import React from "react";
 import "./App.css";
 
 //Importing Components
-
 import Login from "./components/Login";
 import Quiz from "./components/Quiz";
 import AddQuiz from "./components/AddQuiz";
@@ -17,11 +16,9 @@ import Result from "./components/Result";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
-	
-	
-
 	return (
 		
+		//Routes
 		<Router basename="/quiz-app">
 			<Route path="/" exact component={Home} />
 			<Route path="/play/instructions" exact component={QuizInstructions} />

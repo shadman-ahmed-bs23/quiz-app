@@ -1,13 +1,19 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+
+//Importing CSS
 import "./../App.css"
 
+//Importing firebase config
 import "firebase/firestore"
 import firebaseAuth from './firebaseAuth';
 
 const Result = () => {
+  //States
   const [results, setResults] = useState([]); 
+
+  //useEffect
 	useEffect (() => {
     let firestore = firebaseAuth.firestore(); 
     const saveLastResult = () => {
@@ -43,12 +49,7 @@ const Result = () => {
     } 
 		fetchResults(); 
 	}, []); 
-  
-  
-	
-	
-	
-  
+
 	return (
 		<Fragment>
 			<Helmet>
@@ -66,9 +67,7 @@ const Result = () => {
             </li>
 
           ))}
-        </ul>
-        
-				
+        </ul>	
 				<Link to="/">
 					<button className="btn btn-outline-secondary ml-2 mt-5">
 						Go to Home
