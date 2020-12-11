@@ -19,6 +19,7 @@ const QuizInstructions = () => {
 													.collection("quizzes")
 													.get();
 										
+													
 			console.log(data.docs.map(doc=> doc.id));
 			setTopics(data.docs);
 		};

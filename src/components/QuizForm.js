@@ -32,7 +32,6 @@ class QuizForm extends React.Component {
     }
   }
   
-  
   nextQuestion = (e) => {
     e.preventDefault();
 
